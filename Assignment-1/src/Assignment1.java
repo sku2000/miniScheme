@@ -438,9 +438,5 @@ public class Assignment1 {
         GenerateX8664 generateX8664 = new GenerateX8664("gen.ss");
 
         generateX8664.run(ast1);
-
-//        Pattern pattern = Pattern.compile("^[-+*]");
-//        Matcher m = pattern.matcher("/ 1 2");
-
     }
 }
