@@ -1,6 +1,8 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -341,10 +343,72 @@ class VerifierScheme implements PassBase<AST> {
     }
 }
 class GenerateX8664 implements PassBase<AST> {
+    String path;
+    PrintWriter printWriter;
+    public GenerateX8664(String path) {
+        this.path = path;
+    }
+    void GenerateStatement(AList aList) {
+        List<AST> list = aList.list;
+        if (!(list.get(2) instanceof AList)) {
+            printWriter.print("movq ");
+            if (list.get(2) instanceof Var)
+                printWriter.print("%");
+            else if (list.get(2) instanceof SInt)
+                printWriter.print("$");
+            else
+                throw new RuntimeException("无法解析错误: " + aList.toString());
+            printWriter.print(list.get(2).toString() + ", ");
+            printWriter.print("%" + list.get(1).toString());
 
+        } else {
+            AList aList1 = (AList)list.get(2);
+            Var v = (Var) aList1.list.get(0);
+            if (v.toString().equals("+"))
+                printWriter.print("addq ");
+            else if (v.toString().equals("-"))
+                printWriter.print("subq ");
+            else if (v.toString().equals("*"))
+                printWriter.print("mullq ");
+            else
+                throw new RuntimeException("无法解析错误：" + v.toString());
+
+            if (aList1.list.get(2) instanceof Var)
+                printWriter.print("%");
+            else if (aList1.list.get(2) instanceof SInt)
+                printWriter.print("$");
+            else
+                throw new RuntimeException("无法解析错误: " + aList.toString());
+            printWriter.print(aList1.list.get(2).toString() + ", ");
+
+            printWriter.print("%" + aList1.list.get(1).toString());
+        }
+    }
+
+    void GenerateProgram(Program program) {
+        AList aList = (AList) program.program;
+        Iterator<AST> it = aList.list.iterator();
+        it.next();
+        while (it.hasNext()) {
+            printWriter.print("\t");
+            GenerateStatement((AList) it.next());
+            printWriter.println();
+        }
+    }
     @Override
     public AST run(AST ast) {
-        return null;
+        try {
+            printWriter = new PrintWriter(new FileWriter(path));
+            printWriter.println(".globl_scheme_entry\n" +
+                    "_scheme_entry:");
+            GenerateProgram((Program)ast);
+            printWriter.println("\tret");
+            printWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("文件 IO 异常");
+        }
+        return ast;
     }
 }
 public class Assignment1 {
@@ -360,7 +424,7 @@ public class Assignment1 {
     }
     public static void main(String[] args) {
         String str = " ( begin\n" +
-                "(  set! rax 5000000000)\n" +
+                "(  set! rax 8)\n" +
                 "( set! rcx 3)\n" +
                 "( set! rax (- rax rcx)))";
 
@@ -371,9 +435,9 @@ public class Assignment1 {
 
         AST ast1 = verifierScheme.run(ast);
 
-        String s = ast1.toString();
+        GenerateX8664 generateX8664 = new GenerateX8664("gen.ss");
 
-        System.out.println(s);
+        generateX8664.run(ast1);
 
 //        Pattern pattern = Pattern.compile("^[-+*]");
 //        Matcher m = pattern.matcher("/ 1 2");
