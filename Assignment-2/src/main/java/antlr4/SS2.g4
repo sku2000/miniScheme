@@ -1,5 +1,10 @@
 grammar SS2;
 
+@header {
+package parser;
+}
+
+
 program: '(' 'letrec'  '(' ('[' LABEL '(' 'lambda' '(' ')' tail ')' ']')* ')' tail ')';
 
 tail: '(' triv ')'

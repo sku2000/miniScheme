@@ -9,7 +9,7 @@
           <option name="outputDir" value="D:\programs\compiler\miniScheme\Assignment-2\src\main\java\parser" />
           <option name="libDir" value="" />
           <option name="encoding" value="" />
-          <option name="pkg" value="" />
+          <option name="pkg" value="parser.antlr4" />
           <option name="language" value="" />
           <option name="generateVisitor" value="true" />
         </PerGrammarGenerationSettings>
