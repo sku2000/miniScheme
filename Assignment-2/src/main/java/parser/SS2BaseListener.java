@@ -31,25 +31,61 @@ public class SS2BaseListener implements SS2Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTail(SS2Parser.TailContext ctx) { }
+	@Override public void enterAbstracts(SS2Parser.AbstractsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTail(SS2Parser.TailContext ctx) { }
+	@Override public void exitAbstracts(SS2Parser.AbstractsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEffect(SS2Parser.EffectContext ctx) { }
+	@Override public void enterImmediate(SS2Parser.ImmediateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEffect(SS2Parser.EffectContext ctx) { }
+	@Override public void exitImmediate(SS2Parser.ImmediateContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSequence(SS2Parser.SequenceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSequence(SS2Parser.SequenceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDirectAssign(SS2Parser.DirectAssignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDirectAssign(SS2Parser.DirectAssignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExpressionAssign(SS2Parser.ExpressionAssignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpressionAssign(SS2Parser.ExpressionAssignContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

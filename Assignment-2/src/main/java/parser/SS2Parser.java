@@ -20,20 +20,21 @@ public class SS2Parser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, MUL=9, 
-		SUB=10, ADD=11, AND=12, OR=13, SRA=14, LABEL=15, NUMBER=16, INT=17, REG=18, 
-		FVAR=19;
+		SUB=10, ADD=11, AND=12, OR=13, SRA=14, WS=15, LABEL=16, NUMBER=17, INT=18, 
+		REG=19, FVAR=20;
 	public static final int
-		RULE_program = 0, RULE_tail = 1, RULE_effect = 2, RULE_var = 3, RULE_triv = 4;
+		RULE_program = 0, RULE_abstracts = 1, RULE_tail = 2, RULE_effect = 3, 
+		RULE_var = 4, RULE_triv = 5;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"program", "tail", "effect", "var", "triv"
+			"program", "abstracts", "tail", "effect", "var", "triv"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'('", "'letrec'", "'['", "'lambda'", "')'", "']'", "'begin'", 
+			null, "'('", "'letrec'", "')'", "'['", "'lambda'", "']'", "'begin'", 
 			"'set!'", "'*'", "'-'", "'+'", "'logand'", "'logor'", "'sra'"
 		};
 	}
@@ -41,7 +42,7 @@ public class SS2Parser extends Parser {
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, "MUL", "SUB", "ADD", 
-			"AND", "OR", "SRA", "LABEL", "NUMBER", "INT", "REG", "FVAR"
+			"AND", "OR", "SRA", "WS", "LABEL", "NUMBER", "INT", "REG", "FVAR"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -97,15 +98,14 @@ public class SS2Parser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ProgramContext extends ParserRuleContext {
-		public List<TailContext> tail() {
-			return getRuleContexts(TailContext.class);
+		public TailContext tail() {
+			return getRuleContext(TailContext.class,0);
 		}
-		public TailContext tail(int i) {
-			return getRuleContext(TailContext.class,i);
+		public List<AbstractsContext> abstracts() {
+			return getRuleContexts(AbstractsContext.class);
 		}
-		public List<TerminalNode> LABEL() { return getTokens(SS2Parser.LABEL); }
-		public TerminalNode LABEL(int i) {
-			return getToken(SS2Parser.LABEL, i);
+		public AbstractsContext abstracts(int i) {
+			return getRuleContext(AbstractsContext.class,i);
 		}
 		public ProgramContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -133,48 +133,94 @@ public class SS2Parser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(10);
-			match(T__0);
-			setState(11);
-			match(T__1);
 			setState(12);
 			match(T__0);
-			setState(25);
+			setState(13);
+			match(T__1);
+			setState(14);
+			match(T__0);
+			setState(18);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==T__2) {
+			while (_la==T__3) {
 				{
 				{
-				setState(13);
-				match(T__2);
-				setState(14);
-				match(LABEL);
 				setState(15);
-				match(T__0);
-				setState(16);
-				match(T__3);
-				setState(17);
-				match(T__0);
-				setState(18);
-				match(T__4);
-				setState(19);
-				tail();
+				abstracts();
+				}
+				}
 				setState(20);
-				match(T__4);
-				setState(21);
-				match(T__5);
-				}
-				}
-				setState(27);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
+			setState(21);
+			match(T__2);
+			setState(22);
+			tail();
+			setState(23);
+			match(T__2);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class AbstractsContext extends ParserRuleContext {
+		public TerminalNode LABEL() { return getToken(SS2Parser.LABEL, 0); }
+		public TailContext tail() {
+			return getRuleContext(TailContext.class,0);
+		}
+		public AbstractsContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_abstracts; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SS2Listener ) ((SS2Listener)listener).enterAbstracts(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SS2Listener ) ((SS2Listener)listener).exitAbstracts(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof SS2Visitor ) return ((SS2Visitor<? extends T>)visitor).visitAbstracts(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final AbstractsContext abstracts() throws RecognitionException {
+		AbstractsContext _localctx = new AbstractsContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_abstracts);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(25);
+			match(T__3);
+			setState(26);
+			match(LABEL);
+			setState(27);
+			match(T__0);
 			setState(28);
 			match(T__4);
 			setState(29);
-			tail();
+			match(T__0);
 			setState(30);
-			match(T__4);
+			match(T__2);
+			setState(31);
+			tail();
+			setState(32);
+			match(T__2);
+			setState(33);
+			match(T__5);
 			}
 		}
 		catch (RecognitionException re) {
@@ -190,9 +236,18 @@ public class SS2Parser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class TailContext extends ParserRuleContext {
-		public TrivContext triv() {
-			return getRuleContext(TrivContext.class,0);
+		public TailContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
 		}
+		@Override public int getRuleIndex() { return RULE_tail; }
+	 
+		public TailContext() { }
+		public void copyFrom(TailContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class SequenceContext extends TailContext {
 		public TailContext tail() {
 			return getRuleContext(TailContext.class,0);
 		}
@@ -202,71 +257,90 @@ public class SS2Parser extends Parser {
 		public EffectContext effect(int i) {
 			return getRuleContext(EffectContext.class,i);
 		}
-		public TailContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_tail; }
+		public SequenceContext(TailContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SS2Listener ) ((SS2Listener)listener).enterTail(this);
+			if ( listener instanceof SS2Listener ) ((SS2Listener)listener).enterSequence(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SS2Listener ) ((SS2Listener)listener).exitTail(this);
+			if ( listener instanceof SS2Listener ) ((SS2Listener)listener).exitSequence(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SS2Visitor ) return ((SS2Visitor<? extends T>)visitor).visitTail(this);
+			if ( visitor instanceof SS2Visitor ) return ((SS2Visitor<? extends T>)visitor).visitSequence(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class ImmediateContext extends TailContext {
+		public TrivContext triv() {
+			return getRuleContext(TrivContext.class,0);
+		}
+		public ImmediateContext(TailContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SS2Listener ) ((SS2Listener)listener).enterImmediate(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SS2Listener ) ((SS2Listener)listener).exitImmediate(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof SS2Visitor ) return ((SS2Visitor<? extends T>)visitor).visitImmediate(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
 	public final TailContext tail() throws RecognitionException {
 		TailContext _localctx = new TailContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_tail);
+		enterRule(_localctx, 4, RULE_tail);
 		try {
 			int _alt;
-			setState(47);
+			setState(50);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
 			case 1:
+				_localctx = new ImmediateContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(32);
+				setState(35);
 				match(T__0);
-				setState(33);
+				setState(36);
 				triv();
-				setState(34);
-				match(T__4);
+				setState(37);
+				match(T__2);
 				}
 				break;
 			case 2:
+				_localctx = new SequenceContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(36);
+				setState(39);
 				match(T__0);
-				setState(37);
+				setState(40);
 				match(T__6);
-				setState(41);
+				setState(44);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
 				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 					if ( _alt==1 ) {
 						{
 						{
-						setState(38);
+						setState(41);
 						effect();
 						}
 						} 
 					}
-					setState(43);
+					setState(46);
 					_errHandler.sync(this);
 					_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
 				}
-				setState(44);
+				setState(47);
 				tail();
-				setState(45);
-				match(T__4);
+				setState(48);
+				match(T__2);
 				}
 				break;
 			}
@@ -284,6 +358,18 @@ public class SS2Parser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class EffectContext extends ParserRuleContext {
+		public EffectContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_effect; }
+	 
+		public EffectContext() { }
+		public void copyFrom(EffectContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class ExpressionAssignContext extends EffectContext {
 		public Token op;
 		public VarContext var() {
 			return getRuleContext(VarContext.class,0);
@@ -300,78 +386,100 @@ public class SS2Parser extends Parser {
 		public TerminalNode AND() { return getToken(SS2Parser.AND, 0); }
 		public TerminalNode OR() { return getToken(SS2Parser.OR, 0); }
 		public TerminalNode SRA() { return getToken(SS2Parser.SRA, 0); }
-		public EffectContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_effect; }
+		public ExpressionAssignContext(EffectContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SS2Listener ) ((SS2Listener)listener).enterEffect(this);
+			if ( listener instanceof SS2Listener ) ((SS2Listener)listener).enterExpressionAssign(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SS2Listener ) ((SS2Listener)listener).exitEffect(this);
+			if ( listener instanceof SS2Listener ) ((SS2Listener)listener).exitExpressionAssign(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SS2Visitor ) return ((SS2Visitor<? extends T>)visitor).visitEffect(this);
+			if ( visitor instanceof SS2Visitor ) return ((SS2Visitor<? extends T>)visitor).visitExpressionAssign(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class DirectAssignContext extends EffectContext {
+		public VarContext var() {
+			return getRuleContext(VarContext.class,0);
+		}
+		public TrivContext triv() {
+			return getRuleContext(TrivContext.class,0);
+		}
+		public DirectAssignContext(EffectContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SS2Listener ) ((SS2Listener)listener).enterDirectAssign(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SS2Listener ) ((SS2Listener)listener).exitDirectAssign(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof SS2Visitor ) return ((SS2Visitor<? extends T>)visitor).visitDirectAssign(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
 	public final EffectContext effect() throws RecognitionException {
 		EffectContext _localctx = new EffectContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_effect);
+		enterRule(_localctx, 6, RULE_effect);
 		int _la;
 		try {
-			setState(65);
+			setState(68);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
 			case 1:
+				_localctx = new DirectAssignContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(49);
-				match(T__0);
-				setState(50);
-				match(T__7);
-				setState(51);
-				var();
 				setState(52);
-				triv();
+				match(T__0);
 				setState(53);
-				match(T__4);
+				match(T__7);
+				setState(54);
+				var();
+				setState(55);
+				triv();
+				setState(56);
+				match(T__2);
 				}
 				break;
 			case 2:
+				_localctx = new ExpressionAssignContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(55);
-				match(T__0);
-				setState(56);
-				match(T__7);
-				setState(57);
-				var();
 				setState(58);
 				match(T__0);
 				setState(59);
-				((EffectContext)_localctx).op = _input.LT(1);
+				match(T__7);
+				setState(60);
+				var();
+				setState(61);
+				match(T__0);
+				setState(62);
+				((ExpressionAssignContext)_localctx).op = _input.LT(1);
 				_la = _input.LA(1);
 				if ( !(((_la) & ~0x3f) == 0 && ((1L << _la) & 32256L) != 0) ) {
-					((EffectContext)_localctx).op = (Token)_errHandler.recoverInline(this);
+					((ExpressionAssignContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 				}
 				else {
 					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(60);
-				triv();
-				setState(61);
-				triv();
-				setState(62);
-				match(T__4);
 				setState(63);
-				match(T__4);
+				triv();
+				setState(64);
+				triv();
+				setState(65);
+				match(T__2);
+				setState(66);
+				match(T__2);
 				}
 				break;
 			}
@@ -412,12 +520,12 @@ public class SS2Parser extends Parser {
 
 	public final VarContext var() throws RecognitionException {
 		VarContext _localctx = new VarContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_var);
+		enterRule(_localctx, 8, RULE_var);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(67);
+			setState(70);
 			_la = _input.LA(1);
 			if ( !(_la==REG || _la==FVAR) ) {
 			_errHandler.recoverInline(this);
@@ -468,30 +576,30 @@ public class SS2Parser extends Parser {
 
 	public final TrivContext triv() throws RecognitionException {
 		TrivContext _localctx = new TrivContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_triv);
+		enterRule(_localctx, 10, RULE_triv);
 		try {
-			setState(72);
+			setState(75);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case REG:
 			case FVAR:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(69);
+				setState(72);
 				var();
 				}
 				break;
 			case NUMBER:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(70);
+				setState(73);
 				match(NUMBER);
 				}
 				break;
 			case LABEL:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(71);
+				setState(74);
 				match(LABEL);
 				}
 				break;
@@ -511,51 +619,52 @@ public class SS2Parser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u0013K\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
-		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0001"+
-		"\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001"+
-		"\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001"+
-		"\u0000\u0005\u0000\u0018\b\u0000\n\u0000\f\u0000\u001b\t\u0000\u0001\u0000"+
-		"\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001\u0001\u0001"+
-		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0005\u0001(\b\u0001"+
-		"\n\u0001\f\u0001+\t\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0003\u0001"+
-		"0\b\u0001\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002"+
+		"\u0004\u0001\u0014N\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
+		"\u0005\u0007\u0005\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0005"+
+		"\u0000\u0011\b\u0000\n\u0000\f\u0000\u0014\t\u0000\u0001\u0000\u0001\u0000"+
+		"\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
+		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
 		"\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002"+
-		"\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0003\u0002"+
-		"B\b\u0002\u0001\u0003\u0001\u0003\u0001\u0004\u0001\u0004\u0001\u0004"+
-		"\u0003\u0004I\b\u0004\u0001\u0004\u0000\u0000\u0005\u0000\u0002\u0004"+
-		"\u0006\b\u0000\u0002\u0001\u0000\t\u000e\u0001\u0000\u0012\u0013K\u0000"+
-		"\n\u0001\u0000\u0000\u0000\u0002/\u0001\u0000\u0000\u0000\u0004A\u0001"+
-		"\u0000\u0000\u0000\u0006C\u0001\u0000\u0000\u0000\bH\u0001\u0000\u0000"+
-		"\u0000\n\u000b\u0005\u0001\u0000\u0000\u000b\f\u0005\u0002\u0000\u0000"+
-		"\f\u0019\u0005\u0001\u0000\u0000\r\u000e\u0005\u0003\u0000\u0000\u000e"+
-		"\u000f\u0005\u000f\u0000\u0000\u000f\u0010\u0005\u0001\u0000\u0000\u0010"+
-		"\u0011\u0005\u0004\u0000\u0000\u0011\u0012\u0005\u0001\u0000\u0000\u0012"+
-		"\u0013\u0005\u0005\u0000\u0000\u0013\u0014\u0003\u0002\u0001\u0000\u0014"+
-		"\u0015\u0005\u0005\u0000\u0000\u0015\u0016\u0005\u0006\u0000\u0000\u0016"+
-		"\u0018\u0001\u0000\u0000\u0000\u0017\r\u0001\u0000\u0000\u0000\u0018\u001b"+
-		"\u0001\u0000\u0000\u0000\u0019\u0017\u0001\u0000\u0000\u0000\u0019\u001a"+
-		"\u0001\u0000\u0000\u0000\u001a\u001c\u0001\u0000\u0000\u0000\u001b\u0019"+
-		"\u0001\u0000\u0000\u0000\u001c\u001d\u0005\u0005\u0000\u0000\u001d\u001e"+
-		"\u0003\u0002\u0001\u0000\u001e\u001f\u0005\u0005\u0000\u0000\u001f\u0001"+
-		"\u0001\u0000\u0000\u0000 !\u0005\u0001\u0000\u0000!\"\u0003\b\u0004\u0000"+
-		"\"#\u0005\u0005\u0000\u0000#0\u0001\u0000\u0000\u0000$%\u0005\u0001\u0000"+
-		"\u0000%)\u0005\u0007\u0000\u0000&(\u0003\u0004\u0002\u0000\'&\u0001\u0000"+
-		"\u0000\u0000(+\u0001\u0000\u0000\u0000)\'\u0001\u0000\u0000\u0000)*\u0001"+
-		"\u0000\u0000\u0000*,\u0001\u0000\u0000\u0000+)\u0001\u0000\u0000\u0000"+
-		",-\u0003\u0002\u0001\u0000-.\u0005\u0005\u0000\u0000.0\u0001\u0000\u0000"+
-		"\u0000/ \u0001\u0000\u0000\u0000/$\u0001\u0000\u0000\u00000\u0003\u0001"+
-		"\u0000\u0000\u000012\u0005\u0001\u0000\u000023\u0005\b\u0000\u000034\u0003"+
-		"\u0006\u0003\u000045\u0003\b\u0004\u000056\u0005\u0005\u0000\u00006B\u0001"+
-		"\u0000\u0000\u000078\u0005\u0001\u0000\u000089\u0005\b\u0000\u00009:\u0003"+
-		"\u0006\u0003\u0000:;\u0005\u0001\u0000\u0000;<\u0007\u0000\u0000\u0000"+
-		"<=\u0003\b\u0004\u0000=>\u0003\b\u0004\u0000>?\u0005\u0005\u0000\u0000"+
-		"?@\u0005\u0005\u0000\u0000@B\u0001\u0000\u0000\u0000A1\u0001\u0000\u0000"+
-		"\u0000A7\u0001\u0000\u0000\u0000B\u0005\u0001\u0000\u0000\u0000CD\u0007"+
-		"\u0001\u0000\u0000D\u0007\u0001\u0000\u0000\u0000EI\u0003\u0006\u0003"+
-		"\u0000FI\u0005\u0010\u0000\u0000GI\u0005\u000f\u0000\u0000HE\u0001\u0000"+
-		"\u0000\u0000HF\u0001\u0000\u0000\u0000HG\u0001\u0000\u0000\u0000I\t\u0001"+
-		"\u0000\u0000\u0000\u0005\u0019)/AH";
+		"\u0001\u0002\u0005\u0002+\b\u0002\n\u0002\f\u0002.\t\u0002\u0001\u0002"+
+		"\u0001\u0002\u0001\u0002\u0003\u00023\b\u0002\u0001\u0003\u0001\u0003"+
+		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
+		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
+		"\u0001\u0003\u0001\u0003\u0003\u0003E\b\u0003\u0001\u0004\u0001\u0004"+
+		"\u0001\u0005\u0001\u0005\u0001\u0005\u0003\u0005L\b\u0005\u0001\u0005"+
+		"\u0000\u0000\u0006\u0000\u0002\u0004\u0006\b\n\u0000\u0002\u0001\u0000"+
+		"\t\u000e\u0001\u0000\u0013\u0014M\u0000\f\u0001\u0000\u0000\u0000\u0002"+
+		"\u0019\u0001\u0000\u0000\u0000\u00042\u0001\u0000\u0000\u0000\u0006D\u0001"+
+		"\u0000\u0000\u0000\bF\u0001\u0000\u0000\u0000\nK\u0001\u0000\u0000\u0000"+
+		"\f\r\u0005\u0001\u0000\u0000\r\u000e\u0005\u0002\u0000\u0000\u000e\u0012"+
+		"\u0005\u0001\u0000\u0000\u000f\u0011\u0003\u0002\u0001\u0000\u0010\u000f"+
+		"\u0001\u0000\u0000\u0000\u0011\u0014\u0001\u0000\u0000\u0000\u0012\u0010"+
+		"\u0001\u0000\u0000\u0000\u0012\u0013\u0001\u0000\u0000\u0000\u0013\u0015"+
+		"\u0001\u0000\u0000\u0000\u0014\u0012\u0001\u0000\u0000\u0000\u0015\u0016"+
+		"\u0005\u0003\u0000\u0000\u0016\u0017\u0003\u0004\u0002\u0000\u0017\u0018"+
+		"\u0005\u0003\u0000\u0000\u0018\u0001\u0001\u0000\u0000\u0000\u0019\u001a"+
+		"\u0005\u0004\u0000\u0000\u001a\u001b\u0005\u0010\u0000\u0000\u001b\u001c"+
+		"\u0005\u0001\u0000\u0000\u001c\u001d\u0005\u0005\u0000\u0000\u001d\u001e"+
+		"\u0005\u0001\u0000\u0000\u001e\u001f\u0005\u0003\u0000\u0000\u001f \u0003"+
+		"\u0004\u0002\u0000 !\u0005\u0003\u0000\u0000!\"\u0005\u0006\u0000\u0000"+
+		"\"\u0003\u0001\u0000\u0000\u0000#$\u0005\u0001\u0000\u0000$%\u0003\n\u0005"+
+		"\u0000%&\u0005\u0003\u0000\u0000&3\u0001\u0000\u0000\u0000\'(\u0005\u0001"+
+		"\u0000\u0000(,\u0005\u0007\u0000\u0000)+\u0003\u0006\u0003\u0000*)\u0001"+
+		"\u0000\u0000\u0000+.\u0001\u0000\u0000\u0000,*\u0001\u0000\u0000\u0000"+
+		",-\u0001\u0000\u0000\u0000-/\u0001\u0000\u0000\u0000.,\u0001\u0000\u0000"+
+		"\u0000/0\u0003\u0004\u0002\u000001\u0005\u0003\u0000\u000013\u0001\u0000"+
+		"\u0000\u00002#\u0001\u0000\u0000\u00002\'\u0001\u0000\u0000\u00003\u0005"+
+		"\u0001\u0000\u0000\u000045\u0005\u0001\u0000\u000056\u0005\b\u0000\u0000"+
+		"67\u0003\b\u0004\u000078\u0003\n\u0005\u000089\u0005\u0003\u0000\u0000"+
+		"9E\u0001\u0000\u0000\u0000:;\u0005\u0001\u0000\u0000;<\u0005\b\u0000\u0000"+
+		"<=\u0003\b\u0004\u0000=>\u0005\u0001\u0000\u0000>?\u0007\u0000\u0000\u0000"+
+		"?@\u0003\n\u0005\u0000@A\u0003\n\u0005\u0000AB\u0005\u0003\u0000\u0000"+
+		"BC\u0005\u0003\u0000\u0000CE\u0001\u0000\u0000\u0000D4\u0001\u0000\u0000"+
+		"\u0000D:\u0001\u0000\u0000\u0000E\u0007\u0001\u0000\u0000\u0000FG\u0007"+
+		"\u0001\u0000\u0000G\t\u0001\u0000\u0000\u0000HL\u0003\b\u0004\u0000IL"+
+		"\u0005\u0011\u0000\u0000JL\u0005\u0010\u0000\u0000KH\u0001\u0000\u0000"+
+		"\u0000KI\u0001\u0000\u0000\u0000KJ\u0001\u0000\u0000\u0000L\u000b\u0001"+
+		"\u0000\u0000\u0000\u0005\u0012,2DK";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

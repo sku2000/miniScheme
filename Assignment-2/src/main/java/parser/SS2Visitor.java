@@ -19,17 +19,39 @@ public interface SS2Visitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProgram(SS2Parser.ProgramContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SS2Parser#tail}.
+	 * Visit a parse tree produced by {@link SS2Parser#abstracts}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTail(SS2Parser.TailContext ctx);
+	T visitAbstracts(SS2Parser.AbstractsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SS2Parser#effect}.
+	 * Visit a parse tree produced by the {@code immediate}
+	 * labeled alternative in {@link SS2Parser#tail}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitEffect(SS2Parser.EffectContext ctx);
+	T visitImmediate(SS2Parser.ImmediateContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code sequence}
+	 * labeled alternative in {@link SS2Parser#tail}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSequence(SS2Parser.SequenceContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code directAssign}
+	 * labeled alternative in {@link SS2Parser#effect}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDirectAssign(SS2Parser.DirectAssignContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code expressionAssign}
+	 * labeled alternative in {@link SS2Parser#effect}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpressionAssign(SS2Parser.ExpressionAssignContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link SS2Parser#var}.
 	 * @param ctx the parse tree

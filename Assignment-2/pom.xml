@@ -17,13 +17,17 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
+            <version>4.13.1</version>
         </dependency>
         <dependency>
             <groupId>org.antlr</groupId>
             <artifactId>antlr4-runtime</artifactId>
             <version>4.11.1</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
         </dependency>
     </dependencies>
 
@@ -44,7 +48,7 @@
                 <configuration>
                     <sourceDirectory>src/main/java/antlr4</sourceDirectory>
                     <outputDirectory>src/main/java/parser</outputDirectory>
-<!--                    <listener>true</listener>-->
+                    <listener>true</listener>
                     <visitor>true</visitor>
 <!--                    <treatWarningsAsErrors>true</treatWarningsAsErrors>-->
                 </configuration>
