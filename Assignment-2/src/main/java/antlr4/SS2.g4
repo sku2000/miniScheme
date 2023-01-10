@@ -14,7 +14,8 @@ tail: '(' triv ')' # immediate
     ;
 
 effect: '(' 'set!' var triv ')' # directAssign
-      | '(' 'set!' var '(' op=('+' | '-' | '*' | 'logand' | 'logor' | 'sra') triv triv ')' ')' # expressionAssign
+      | '(' 'set!' var '(' op=('+' | '-' | '*' | 'logand'
+                                | 'logor' | 'sra') triv triv ')' ')' # expressionAssign
       ;
 
 var: REG
